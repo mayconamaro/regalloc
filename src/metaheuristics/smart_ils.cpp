@@ -1,8 +1,8 @@
-#include "../program.hpp"
 #include "smart_ils.hpp"
+#include "../program.hpp"
 
-//TODO
-float metaheuristic::smart_ils(interference_graph&, color_mapping&, float){
+// TODO
+float metaheuristic::smart_ils(interference_graph &, color_mapping &, float) {
 
-    return 0;
+  return 0;
 }
