@@ -19,7 +19,7 @@ namespace program {
     
     live_info parse(std::filesystem::path);
 
-    interference_graph build_interference_graph(live_info);
+    interference_graph build_interference_graph(live_info&);
 }
 
 #endif

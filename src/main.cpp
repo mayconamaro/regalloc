@@ -23,6 +23,7 @@ int main(int argc, char *argv[]){
     std::filesystem::path file(argv[1]);
 
     live_info l = program::parse(file);
+
     interference_graph i = program::build_interference_graph(l);
     
     std::pair<float, color_mapping> p = construction::greedy(i);
@@ -32,5 +33,5 @@ int main(int argc, char *argv[]){
     fo = local_search::random(i, initial, fo);
     fo = metaheuristic::smart_ils(i, initial, fo);
 
-    std::cout << fo << std::endl;
+    //std::cout << fo << std::endl;
 }
