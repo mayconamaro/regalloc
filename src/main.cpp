@@ -1,5 +1,6 @@
 #include "construction.hpp"
 #include "local_search.hpp"
+#include "metaheuristics/multi_start.hpp"
 #include "metaheuristics/smart_ils.hpp"
 #include "program.hpp"
 #include <cstdlib>
@@ -41,9 +42,9 @@ int main(int argc, char *argv[]) {
 
   std::cout << "fo: " << fo << std::endl;
 
-  fo = local_search::random(i, initial, fo, 10);
+  fo = metaheuristic::smart_ils(i, initial, fo, 100, 5);
 
-  std::cout <<"local search applied! " <<std::endl;
+  std::cout << "meta applied! " << std::endl;
   for (int k = 0; k < (int)initial.size(); k++) {
     for (int m = 0; m < (int)initial.at(k).size(); m++) {
       if (initial.at(k).at(m) == 1) {
@@ -53,6 +54,6 @@ int main(int argc, char *argv[]) {
       }
     }
   }
-  
+
   std::cout << "fo: " << fo << std::endl;
 }

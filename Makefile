@@ -17,7 +17,10 @@ build/construction.o: src/construction.cpp
 build/smart_ils.o: src/metaheuristics/smart_ils.cpp
 	g++ -std=c++20 -c src/metaheuristics/smart_ils.cpp -o build/smart_ils.o -Wall
 
-regalloc: build/program.o build/construction.o build/local_search.o build/smart_ils.o src/main.cpp
+build/multi_start.o: src/metaheuristics/multi_start.cpp
+	g++ -std=c++20 -c src/metaheuristics/multi_start.cpp -o build/multi_start.o -Wall
+
+regalloc: build/program.o build/construction.o build/local_search.o build/smart_ils.o build/multi_start.o src/main.cpp
 	g++ -std=c++20 build/*.o src/main.cpp -o regalloc -Wall
 	
 	

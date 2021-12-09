@@ -5,7 +5,7 @@
 
 namespace metaheuristic {
 
-float smart_ils(interference_graph &, color_mapping &, float);
+float smart_ils(interference_graph &, color_mapping &, float, int, int);
 }
 
 #endif
