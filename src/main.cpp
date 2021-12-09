@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 
   interference_graph i = program::build_interference_graph(l);
 
-  std::pair<float, color_mapping> p = construction::greedy(i);
+  std::pair<float, color_mapping> p = construction::random(i);
   float fo = p.first;
   color_mapping initial = p.second;
 
@@ -40,14 +40,19 @@ int main(int argc, char *argv[]) {
   }
 
   std::cout << "fo: " << fo << std::endl;
-  int viz_v = -1;
-  int viz_c = -1;
-  fo = neighbourhood::reallocation(initial, i, fo, viz_v, viz_c);
-  std::cout << "neighbour \t fo: " << fo << " variable " << viz_v
-            << " to register " << viz_c << std::endl;
 
-  // fo = local_search::random(i, initial, fo);
-  // fo = metaheuristic::smart_ils(i, initial, fo);
+  fo = local_search::random(i, initial, fo, 10);
 
-  // std::cout << fo << std::endl;
+  std::cout <<"local search applied! " <<std::endl;
+  for (int k = 0; k < (int)initial.size(); k++) {
+    for (int m = 0; m < (int)initial.at(k).size(); m++) {
+      if (initial.at(k).at(m) == 1) {
+        std::cout << "variable " << k << " bound to register " << m
+                  << std::endl;
+        break;
+      }
+    }
+  }
+  
+  std::cout << "fo: " << fo << std::endl;
 }
