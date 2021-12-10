@@ -1,0 +1,9 @@
+variable 0 bound to register 2
+variable 1 bound to register 1
+variable 2 bound to register 0
+fo: 3
+meta applied! 
+variable 0 bound to register 2
+variable 1 bound to register 1
+variable 2 bound to register 0
+fo: 3

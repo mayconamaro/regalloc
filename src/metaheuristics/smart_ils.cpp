@@ -11,8 +11,9 @@ float metaheuristic::smart_ils(interference_graph &g, color_mapping &t,
   int depth = 1;
   int times = 1;
   float fo_star = fo;
+  int most_recent_improvement = 0;
 
-  while (iter < max_iter) {
+  while (iter - most_recent_improvement < max_iter) {
 
     iter++;
 
@@ -20,7 +21,7 @@ float metaheuristic::smart_ils(interference_graph &g, color_mapping &t,
     for (int i = 0; i < depth; i++) {
       int v = -1;
       int c = -1;
-      fo_s0 = neighbourhood::reallocation(s0, g, fo, v, c);
+      fo_s0 = neighbourhood::reallocation(s0, g, fo_s0, v, c);
 
       // confirm the neighbour
       s0.at(v).at(c) = 1;
@@ -39,6 +40,7 @@ float metaheuristic::smart_ils(interference_graph &g, color_mapping &t,
       t = s0;
       depth = 1;
       times = 1;
+      most_recent_improvement = iter;
     } else {
       if (times <= max_times) {
         times++;
