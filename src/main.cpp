@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
-  std::pair<float, color_mapping> p = construction::random(i);
+  std::pair<float, color_mapping> p = construction::greedy(i);
   float fo = p.first;
   color_mapping initial = p.second;
 
@@ -122,7 +122,9 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Starting solution value: " << fo << std::endl;
 
+  clock_t start_time = clock();
   fo = metaheuristic::multi_start(i, initial, fo, 40);
+  clock_t end_time = clock();
 
 #ifdef DEBUG
   for (int k = 0; k < (int)initial.size(); k++) {
@@ -135,6 +137,9 @@ int main(int argc, char *argv[]) {
     }
   }
 #endif
-
+  double time = (double)(end_time - start_time)/CLOCKS_PER_SEC;
   std::cout << "Final solution value: " << fo << std::endl;
+  std::cout << "Time (seconds): " 
+            << time
+            << std::endl;
 }

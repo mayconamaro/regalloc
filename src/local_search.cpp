@@ -16,7 +16,7 @@ float neighbourhood::realloc_delta(color_mapping &t, interference_graph &g,
     }
   }
 
-  int previous_color = -1;
+  int previous_color = 0;
   int colors_to_add = 1;
   int colors_to_remove = 1;
 
@@ -34,8 +34,6 @@ float neighbourhood::realloc_delta(color_mapping &t, interference_graph &g,
     }
   }
 
-  assert(previous_color >= 0);
-
   for (int i = 0; (size_t)i < t.size(); i++) {
     if (t.at(i).at(previous_color) == 1 && i != v) {
       colors_to_remove = 0;
@@ -50,10 +48,10 @@ float neighbourhood::reallocation(color_mapping &t, interference_graph &g,
                                   float &fo, int &v, int &c) {
   int n = (int)g.vertices.size();
   srand(time(0));
-  v = rand() % n;
+  v = (int) (rand() % n);
 
   do {
-    c = rand() % n;
+    c = (int) (rand() % n);
   } while (t.at(v).at(c) == 1);
 
   return neighbourhood::realloc_delta(t, g, fo, v, c);
@@ -103,7 +101,6 @@ float local_search::random(interference_graph &g, color_mapping &t, float fo,
   float new_fo;
   float fo_star = fo;
 
-  srand(time(0));
   int i, j = -1;
 
   while (iter < max_iter) {

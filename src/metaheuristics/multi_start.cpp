@@ -13,7 +13,7 @@ float metaheuristic::multi_start(interference_graph &g, color_mapping &t,
 
   while (iter < max_iter) {
 
-    std::pair<float, color_mapping> p = construction::random(g);
+    std::pair<float, color_mapping> p = construction::greedy(g);
     color_mapping t_new = p.second;
 
     float fo_new = local_search::first_improvement(g, t_new, p.first);
