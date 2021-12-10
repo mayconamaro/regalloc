@@ -5,6 +5,7 @@
 #include "program.hpp"
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <utility>
 
@@ -36,8 +37,43 @@ int main(int argc, char *argv[]) {
     i = program::build_interference_graph(l);
   }
 
-  if (argv[2][0] == 'G') {
-    
+  if (argv[2][0] == 'G') { // parse the interference graph
+
+    std::fstream file;
+    file.open(argv[1], std::ios::in);
+
+    if (file.is_open()) {
+
+      int edges_number = 0;
+      file >> edges_number;
+
+      for (int i1 = 0; i1 < edges_number; i1++) {
+        int var1 = -1;
+        int var2 = -1;
+        file >> var1 >> var2;
+        var1--;
+        var2--;
+        std::pair<int, int> p(var1, var2);
+
+        i.edges.push_back(p);
+        bool isv1, isv2 = false;
+        for (auto v : i.vertices) {
+          if (v == var1)
+            isv1 = true;
+          if (v == var2)
+            isv1 = true;
+          if (isv1 && isv2)
+            break;
+        }
+
+        if (!isv1)
+          i.vertices.push_back(var1);
+        if (!isv2)
+          i.vertices.push_back(var2);
+      }
+    }
+
+    file.close();
   }
 
 #ifdef DEBUG
@@ -61,7 +97,7 @@ int main(int argc, char *argv[]) {
   }
   if (complete) {
     std::cout
-        << "complete graph, the optimal solution is the number os variables"
+        << "complete graph, the optimal solution is the number of variables"
         << std::endl;
     std::exit(0);
   }

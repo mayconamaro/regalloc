@@ -1,0 +1,6 @@
+huck        -> 11
+jean        -> 10
+queen6      -> 7
+fpsol2i1    -> 65
+fpsol2i2    -> 30
+fpsol2i3    -> 30
